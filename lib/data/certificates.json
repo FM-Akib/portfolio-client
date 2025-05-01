@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "title": "Advanced React and Redux",
+    "issuer": "Udemy",
+    "date": "2023",
+    "credentialUrl": "https://udemy.com/certificate/123456"
+  },
+  {
+    "id": "2",
+    "title": "AWS Certified Developer",
+    "issuer": "Amazon Web Services",
+    "date": "2022",
+    "credentialUrl": "https://aws.amazon.com/certification/123456"
+  },
+  {
+    "id": "3",
+    "title": "Professional Scrum Master I",
+    "issuer": "Scrum.org",
+    "date": "2022",
+    "credentialUrl": "https://scrum.org/certification/123456"
+  },
+  {
+    "id": "4",
+    "title": "MongoDB Certified Developer",
+    "issuer": "MongoDB University",
+    "date": "2021",
+    "credentialUrl": "https://university.mongodb.com/certification/123456"
+  },
+  {
+    "id": "5",
+    "title": "TypeScript Advanced Concepts",
+    "issuer": "Frontend Masters",
+    "date": "2021",
+    "credentialUrl": "https://frontendmasters.com/certification/123456"
+  }
+]

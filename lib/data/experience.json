@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "company": "Tech Innovations Inc.",
+    "position": "Senior Frontend Developer",
+    "duration": "Jan 2022 - Present",
+    "description": "Leading the frontend development team in building modern web applications using React and Next.js. Implementing responsive designs, optimizing performance, and mentoring junior developers.",
+    "responsibilities": [
+      "Architected and implemented the company's design system using React and Storybook",
+      "Reduced page load times by 40% through code splitting and lazy loading",
+      "Led the migration from Create React App to Next.js, improving SEO and performance",
+      "Mentored 5 junior developers through code reviews and pair programming sessions"
+    ],
+    "technologies": ["React", "Next.js", "TypeScript", "Redux", "Tailwind CSS"]
+  },
+  {
+    "id": "2",
+    "company": "Digital Solutions Ltd.",
+    "position": "Full Stack Developer",
+    "duration": "Mar 2020 - Dec 2021",
+    "description": "Developed and maintained full-stack web applications for clients across various industries. Worked with React, Node.js, and MongoDB to deliver scalable solutions.",
+    "responsibilities": [
+      "Built RESTful APIs using Node.js and Express for client applications",
+      "Implemented authentication systems using JWT and OAuth",
+      "Designed and developed database schemas for MongoDB",
+      "Collaborated with UX designers to implement responsive interfaces"
+    ],
+    "technologies": ["React", "Node.js", "Express", "MongoDB", "GraphQL"]
+  },
+  {
+    "id": "3",
+    "company": "WebCraft Agency",
+    "position": "Junior Web Developer",
+    "duration": "Jun 2018 - Feb 2020",
+    "description": "Started as an intern and grew into a full-time role. Worked on various client websites and internal tools using HTML, CSS, JavaScript, and PHP.",
+    "responsibilities": [
+      "Developed and maintained client websites using WordPress and custom PHP",
+      "Created interactive UI components with vanilla JavaScript and jQuery",
+      "Optimized website performance and implemented SEO best practices",
+      "Assisted senior developers with debugging and testing"
+    ],
+    "technologies": ["HTML", "CSS", "JavaScript", "PHP", "WordPress"]
+  }
+]

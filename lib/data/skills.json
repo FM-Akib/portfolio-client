@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "category": "Frontend",
+    "skills": [
+      { "name": "HTML5", "level": 95 },
+      { "name": "CSS3/SASS", "level": 90 },
+      { "name": "JavaScript", "level": 95 },
+      { "name": "TypeScript", "level": 85 },
+      { "name": "React", "level": 90 },
+      { "name": "Next.js", "level": 85 },
+      { "name": "Redux", "level": 80 },
+      { "name": "Tailwind CSS", "level": 90 }
+    ]
+  },
+  {
+    "id": "2",
+    "category": "Backend",
+    "skills": [
+      { "name": "Node.js", "level": 85 },
+      { "name": "Express", "level": 80 },
+      { "name": "Python", "level": 75 },
+      { "name": "Django", "level": 70 },
+      { "name": "PHP", "level": 65 },
+      { "name": "GraphQL", "level": 75 }
+    ]
+  },
+  {
+    "id": "3",
+    "category": "Database",
+    "skills": [
+      { "name": "MongoDB", "level": 85 },
+      { "name": "MySQL", "level": 80 },
+      { "name": "PostgreSQL", "level": 75 },
+      { "name": "Redis", "level": 70 }
+    ]
+  },
+  {
+    "id": "4",
+    "category": "DevOps & Tools",
+    "skills": [
+      { "name": "Git", "level": 90 },
+      { "name": "Docker", "level": 75 },
+      { "name": "AWS", "level": 70 },
+      { "name": "CI/CD", "level": 75 },
+      { "name": "Jest", "level": 80 },
+      { "name": "Webpack", "level": 75 }
+    ]
+  }
+]

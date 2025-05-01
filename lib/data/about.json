@@ -1,0 +1,17 @@
+{
+  "name": "Mohammad Fahim Muntasir Akib",
+  "title": "Full Stack Developer",
+  "description": "I am a passionate full-stack developer with expertise in building modern web applications. With a strong foundation in both frontend and backend technologies, I create seamless, user-friendly experiences that solve real-world problems.",
+  "longDescription": "I specialize in JavaScript/TypeScript ecosystems, with particular focus on React, Next.js, Node.js, and various database technologies. My approach combines technical excellence with creative problem-solving to deliver solutions that exceed expectations. I'm constantly learning and adapting to new technologies to stay at the forefront of web development.",
+  "image": "/images/profile.jpg",
+  "resumeUrl": "/resume.pdf",
+  "socialLinks": {
+    "github": "https://github.com/yourusername",
+    "linkedin": "https://linkedin.com/in/yourusername",
+    "facebook": "https://facebook.com/yourusername",
+    "instagram": "https://instagram.com/yourusername",
+    "codeforces": "https://codeforces.com/profile/yourusername",
+    "codechef": "https://codechef.com/users/yourusername",
+    "youtube": "https://youtube.com/c/yourusername"
+  }
+}

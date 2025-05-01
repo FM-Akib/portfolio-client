@@ -1,0 +1,11 @@
+{
+  "email": "contact@example.com",
+  "phone": "+1 (123) 456-7890",
+  "address": "123 Web Developer Street, Tech City, 12345",
+  "socialLinks": {
+    "linkedin": "https://linkedin.com/in/yourusername",
+    "github": "https://github.com/yourusername",
+    "twitter": "https://twitter.com/yourusername"
+  },
+  "availableFor": ["Full-time positions", "Contract work", "Freelance projects", "Technical consulting"]
+}

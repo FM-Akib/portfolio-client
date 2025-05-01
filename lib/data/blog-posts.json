@@ -1,0 +1,32 @@
+[
+  {
+    "id": "getting-started-with-nextjs",
+    "title": "Getting Started with Next.js: A Comprehensive Guide",
+    "excerpt": "Learn how to build modern web applications with Next.js, from setup to deployment.",
+    "content": "# Getting Started with Next.js\n\nNext.js is a powerful React framework that makes building web applications simple and efficient. In this guide, we'll walk through setting up a Next.js project from scratch and explore its key features.\n\n## Setting Up Your First Project\n\nTo create a new Next.js app, run:\n\n```bash\nnpx create-next-app my-next-app\ncd my-next-app\nnpm run dev\n```\n\nThis will scaffold a new project and start the development server at `http://localhost:3000`.\n\n## Key Features of Next.js\n\n### 1. File-based Routing\n\nNext.js uses a file-based routing system. Simply create files in the `pages` directory, and they'll automatically become routes.\n\n### 2. Server-side Rendering\n\nNext.js provides built-in server-side rendering, which improves performance and SEO.\n\n### 3. API Routes\n\nCreate API endpoints easily by adding files to the `pages/api` directory.\n\n## Conclusion\n\nNext.js simplifies React development by providing a robust framework with sensible defaults. It's perfect for building everything from simple landing pages to complex applications.",
+    "coverImage": "/images/blog/nextjs.jpg",
+    "date": "2023-11-15",
+    "author": "Mohammad Fahim Muntasir Akib",
+    "tags": ["Next.js", "React", "Web Development"]
+  },
+  {
+    "id": "mastering-typescript",
+    "title": "Mastering TypeScript: Tips and Best Practices",
+    "excerpt": "Discover advanced TypeScript techniques to write more maintainable and error-free code.",
+    "content": "# Mastering TypeScript\n\nTypeScript has become an essential tool for modern JavaScript development. Let's explore some advanced techniques and best practices.\n\n## Leveraging Advanced Types\n\n### Union and Intersection Types\n\nUnion types allow a value to be one of several types:\n\n```typescript\ntype Result = Success | Error;\n```\n\nIntersection types combine multiple types into one:\n\n```typescript\ntype Employee = Person & { employeeId: number };\n```\n\n### Generics\n\nGenerics enable you to create reusable components:\n\n```typescript\nfunction identity<T>(arg: T): T {\n  return arg;\n}\n```\n\n## Type Guards and Assertions\n\nType guards help narrow down types within conditional blocks:\n\n```typescript\nfunction processValue(value: string | number) {\n  if (typeof value === 'string') {\n    // TypeScript knows value is a string here\n    return value.toUpperCase();\n  } else {\n    // TypeScript knows value is a number here\n    return value.toFixed(2);\n  }\n}\n```\n\n## Conclusion\n\nMastering TypeScript's advanced features will significantly improve your code quality and developer experience. Start incorporating these techniques into your projects today!",
+    "coverImage": "/images/blog/typescript.jpg",
+    "date": "2023-10-20",
+    "author": "Mohammad Fahim Muntasir Akib",
+    "tags": ["TypeScript", "JavaScript", "Programming"]
+  },
+  {
+    "id": "responsive-design-principles",
+    "title": "Responsive Design Principles for Modern Web Applications",
+    "excerpt": "Learn essential responsive design techniques to ensure your websites look great on all devices.",
+    "content": "# Responsive Design Principles\n\nIn today's multi-device world, responsive design is no longer optional. Here's how to ensure your web applications look and function well across all screen sizes.\n\n## Mobile-First Approach\n\nStart designing for mobile devices first, then progressively enhance for larger screens. This approach forces you to focus on core content and functionality.\n\n## Flexible Grids and Layouts\n\nUse relative units like percentages, ems, or rems instead of fixed pixels:\n\n```css\n.container {\n  width: 100%;\n  max-width: 1200px;\n  margin: 0 auto;\n}\n\n.column {\n  width: 100%;\n}\n\n@media (min-width: 768px) {\n  .column {\n    width: 50%;\n    float: left;\n  }\n}\n```\n\n## Media Queries\n\nUse media queries to apply different styles based on device characteristics:\n\n```css\n/* Base styles for mobile */\n.navigation {\n  display: none;\n}\n\n/* Styles for tablets and above */\n@media (min-width: 768px) {\n  .navigation {\n    display: block;\n  }\n  .mobile-menu {\n    display: none;\n  }\n}\n```\n\n## Responsive Images\n\nEnsure images scale properly and load efficiently:\n\n```html\n<img\n  srcset=\"image-small.jpg 500w, image-medium.jpg 1000w, image-large.jpg 1500w\"\n  sizes=\"(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw\"\n  src=\"image-medium.jpg\"\n  alt=\"Responsive image\"\n/>\n```\n\n## Conclusion\n\nBy following these responsive design principles, you can create web experiences that adapt seamlessly to any device, providing users with an optimal viewing experience.",
+    "coverImage": "/images/blog/responsive.jpg",
+    "date": "2023-09-05",
+    "author": "Mohammad Fahim Muntasir Akib",
+    "tags": ["CSS", "Responsive Design", "Web Development"]
+  }
+]

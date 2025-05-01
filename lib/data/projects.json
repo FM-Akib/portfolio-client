@@ -1,0 +1,41 @@
+[
+  {
+    "id": "1",
+    "title": "E-commerce Platform",
+    "description": "A full-featured e-commerce platform with product management, cart functionality, payment processing, and order tracking.",
+    "longDescription": "This project is a comprehensive e-commerce solution built with Next.js, Node.js, and MongoDB. I was responsible for designing the architecture, implementing the frontend user interface, and developing the backend API. The platform includes features such as product search, filtering, user authentication, shopping cart, payment processing with Stripe, and order management.",
+    "image": "/images/projects/ecommerce.jpg",
+    "tags": ["Next.js", "Node.js", "MongoDB", "Stripe"],
+    "demoUrl": "https://demo-ecommerce.example.com",
+    "githubUrl": "https://github.com/yourusername/ecommerce",
+    "featured": true,
+    "role": "Lead Developer",
+    "completionDate": "2023-06-15"
+  },
+  {
+    "id": "2",
+    "title": "Task Management App",
+    "description": "A collaborative task management application with real-time updates, team workspaces, and progress tracking.",
+    "longDescription": "This task management application helps teams organize and track their work efficiently. Built with React, Express, and Socket.io for real-time updates, it features drag-and-drop task boards, team collaboration tools, file attachments, and detailed reporting. I implemented the frontend UI components, real-time notification system, and authentication flow.",
+    "image": "/images/projects/taskmanager.jpg",
+    "tags": ["React", "Express", "Socket.io", "PostgreSQL"],
+    "demoUrl": "https://task-app.example.com",
+    "githubUrl": "https://github.com/yourusername/task-manager",
+    "featured": true,
+    "role": "Frontend Developer",
+    "completionDate": "2023-03-10"
+  },
+  {
+    "id": "3",
+    "title": "Weather Dashboard",
+    "description": "A weather forecasting application with interactive maps, historical data analysis, and location-based alerts.",
+    "longDescription": "This weather dashboard provides users with current conditions and forecasts for any location worldwide. It integrates with multiple weather APIs to provide accurate data and features interactive maps, historical weather trends, and customizable alerts. I was responsible for the entire development process from concept to deployment.",
+    "image": "/images/projects/weather.jpg",
+    "tags": ["React", "Chart.js", "Weather API", "Mapbox"],
+    "demoUrl": "https://weather.example.com",
+    "githubUrl": "https://github.com/yourusername/weather-app",
+    "featured": false,
+    "role": "Full Stack Developer",
+    "completionDate": "2022-11-20"
+  }
+]

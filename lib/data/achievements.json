@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "title": "Best Web Application Award",
+    "organization": "Tech Innovation Summit",
+    "date": "2023",
+    "description": "Received the Best Web Application award for developing an innovative e-commerce platform with advanced features and exceptional user experience."
+  },
+  {
+    "id": "2",
+    "title": "Open Source Contributor",
+    "organization": "GitHub",
+    "date": "2022",
+    "description": "Recognized as a top contributor to several open-source projects, with over 200 contributions and 5 major feature implementations."
+  },
+  {
+    "id": "3",
+    "title": "Hackathon Winner",
+    "organization": "Global Code Fest",
+    "date": "2021",
+    "description": "Led a team of 4 developers to win first place in a 48-hour hackathon, building a real-time disaster response coordination application."
+  },
+  {
+    "id": "4",
+    "title": "Certified Web Developer",
+    "organization": "Web Development Association",
+    "date": "2020",
+    "description": "Earned advanced certification in full-stack web development with a perfect score on the practical assessment."
+  }
+]
