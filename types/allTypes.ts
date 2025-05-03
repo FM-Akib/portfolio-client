@@ -45,13 +45,14 @@ export interface Blog {
 }
 // types/certificate.ts
 export interface Certificate {
+  _id?: string;
   title: string;
   issuer: string;
   date: Date;
   credential_url: string;
   photo: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 // types/contactDetails.ts
 export interface ContactDetails {

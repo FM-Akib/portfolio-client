@@ -1,97 +1,82 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { checkAuth } from "@/lib/auth"
-import AdminSidebar from "@/components/admin/sidebar"
-import { Loader2, Save } from "lucide-react"
-
-interface CertificateData {
-  id: string
-  title: string
-  issuer: string
-  date: string
-  credentialUrl: string
-}
+import AdminSidebar from '@/components/admin/sidebar';
+import { checkAuth } from '@/lib/auth';
+import axiosInstance from '@/lib/axios';
+import { Certificate } from '@/types/allTypes';
+import { Loader2, Save } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function NewCertificatePage() {
-  const [certificateData, setCertificateData] = useState<CertificateData>({
-    id: "",
-    title: "",
-    issuer: "",
-    date: new Date().getFullYear().toString(),
-    credentialUrl: "",
-  })
-  const [isLoading, setIsLoading] = useState(true)
-  const [isSaving, setIsSaving] = useState(false)
-  const [saveMessage, setSaveMessage] = useState("")
-  const router = useRouter()
+  const [certificateData, setCertificateData] = useState<Certificate>({
+    _id: '',
+    title: '',
+    issuer: '',
+    date: new Date(),
+    credential_url: '',
+    photo: '', // Added the missing 'photo' property
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     const verifyAuth = async () => {
-      const isAuthenticated = await checkAuth()
+      const isAuthenticated = await checkAuth();
       if (!isAuthenticated) {
-        router.push("/admin")
-        return
+        router.push('/admin');
+        return;
       }
-      setIsLoading(false)
-    }
+      setIsLoading(false);
+    };
 
-    verifyAuth()
-  }, [router])
+    verifyAuth();
+  }, [router]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setCertificateData((prev) => ({
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setCertificateData(prev => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSaving(true)
-    setSaveMessage("")
+    e.preventDefault();
+    setIsSaving(true);
+    setSaveMessage('');
+    console.log('Certificate data:', certificateData);
 
     try {
       // Generate a unique ID if not provided
-      if (!certificateData.id) {
-        setCertificateData((prev) => ({
-          ...prev,
-          id: Date.now().toString(),
-        }))
+      const res = await axiosInstance.post('/certificates', {
+        ...certificateData,
+      });
+
+      if (res.status === 200) {
+        setSaveMessage('Certificate saved successfully!');
+        router.push('/admin/dashboard/certificates');
       }
-
-      // In a real app, this would be an API call to save the data to the JSON file
-      // For this demo, we'll just simulate a save
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // Show success message
-      setSaveMessage("Certificate saved successfully!")
-
-      // Log the data that would be saved to the JSON file
-      console.log("Saving certificate data to certificates.json:", certificateData)
-
-      // Redirect to certificates list after a short delay
-      setTimeout(() => {
-        router.push("/admin/dashboard/certificates")
-      }, 1500)
     } catch (error) {
-      console.error("Error saving certificate data:", error)
-      setSaveMessage("Error saving data. Please try again.")
+      console.error('Error saving certificate data:', error);
+      setSaveMessage('Error saving data. Please try again.');
     } finally {
-      setIsSaving(false)
+      setIsSaving(false);
     }
-  }
+  };
 
   if (isLoading) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-green-500" />
       </div>
-    )
+    );
   }
 
   return (
@@ -100,16 +85,20 @@ export default function NewCertificatePage() {
 
       <main className="flex-1 overflow-y-auto p-6">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Add New Certificate</h1>
-          <p className="text-gray-600 dark:text-gray-400">Add a new certificate to your portfolio</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Add New Certificate
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Add a new certificate to your portfolio
+          </p>
         </div>
 
         {saveMessage && (
           <div
             className={`mb-6 rounded-md p-4 ${
-              saveMessage.includes("Error")
-                ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                : "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+              saveMessage.includes('Error')
+                ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
+                : 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
             }`}
           >
             {saveMessage}
@@ -118,7 +107,9 @@ export default function NewCertificatePage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
-            <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">Certificate Details</h2>
+            <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+              Certificate Details
+            </h2>
 
             <div className="grid gap-6 md:grid-cols-2">
               <div>
@@ -136,7 +127,9 @@ export default function NewCertificatePage() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Issuer</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Issuer
+                </label>
                 <input
                   type="text"
                   name="issuer"
@@ -149,11 +142,13 @@ export default function NewCertificatePage() {
             </div>
 
             <div className="mt-6">
-              <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Date</label>
+              <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Date
+              </label>
               <input
                 type="text"
                 name="date"
-                value={certificateData.date}
+                value={certificateData.date.toString()}
                 onChange={handleChange}
                 placeholder="e.g., 2023"
                 className="w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-green-500 focus:outline-none focus:ring-green-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
@@ -162,24 +157,45 @@ export default function NewCertificatePage() {
             </div>
 
             <div className="mt-6">
-              <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Credential URL</label>
+              <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Credential URL
+              </label>
               <input
                 type="url"
-                name="credentialUrl"
-                value={certificateData.credentialUrl}
+                name="credential_url"
+                value={certificateData.credential_url}
                 onChange={handleChange}
                 placeholder="https://example.com/certificate/123456"
                 className="w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-green-500 focus:outline-none focus:ring-green-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                 required
               />
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">URL where the certificate can be verified</p>
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                URL where the certificate can be verified
+              </p>
+            </div>
+            <div className="mt-6">
+              <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Photo
+              </label>
+              <input
+                type="url"
+                name="photo"
+                value={certificateData.photo}
+                onChange={handleChange}
+                placeholder="https://example.com/certificate/123456"
+                className="w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-green-500 focus:outline-none focus:ring-green-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                required
+              />
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                URL where the certificate can be verified
+              </p>
             </div>
           </div>
 
           <div className="flex justify-end space-x-4">
             <button
               type="button"
-              onClick={() => router.push("/admin/dashboard/certificates")}
+              onClick={() => router.push('/admin/dashboard/certificates')}
               className="rounded-md border border-gray-300 bg-white px-6 py-2 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
             >
               Cancel
@@ -205,5 +221,5 @@ export default function NewCertificatePage() {
         </form>
       </main>
     </div>
-  )
+  );
 }
