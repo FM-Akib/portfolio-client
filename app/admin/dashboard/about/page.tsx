@@ -73,10 +73,10 @@ export default function AboutPage() {
     e.preventDefault();
     setIsSaving(true);
     setSaveMessage('');
-    console.log('Submitting about data:', aboutData);
+
     try {
       const response = await axiosInstance.post('/about', aboutData);
-      console.log('Server response:', response.data);
+
       setSaveMessage('About information saved successfully!');
     } catch (error: any) {
       console.error('Error saving about data:', error);

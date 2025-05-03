@@ -84,11 +84,10 @@ export default function NewProjectPage() {
     e.preventDefault();
     setIsSaving(true);
     setSaveMessage('');
-    console.log('Submitting project data:', projectData);
 
     try {
       const response = await axiosInstance.post('/projects', projectData);
-      console.log('Server response:', response.data);
+
       setSaveMessage('Project saved successfully!');
 
       // Redirect after success

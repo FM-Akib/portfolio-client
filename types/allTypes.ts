@@ -22,15 +22,17 @@ export interface AboutData {
 }
 // types/achievement.ts
 export interface Achievement {
+  _id?: string;
   title: string;
   organization: string;
   year: number;
   description: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 // types/blog.ts
 export interface Blog {
+  _id?: string;
   title: string;
   excerpt: string;
   content_markdown: string;
@@ -38,8 +40,8 @@ export interface Blog {
   publication_date: Date;
   author: string;
   tags: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 // types/certificate.ts
 export interface Certificate {
