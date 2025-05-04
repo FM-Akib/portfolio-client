@@ -63,8 +63,8 @@ export interface ContactDetails {
   github_url: string;
   twitter_url: string;
   available_for: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 // types/experience.ts
 export interface Experience {
