@@ -14,6 +14,7 @@ export default function EditAchievementPage() {
   const [achievementData, setAchievementData] = useState<Achievement>({
     _id: '',
     title: '',
+    image: '',
     organization: '',
     year: new Date().getFullYear(),
     description: '',

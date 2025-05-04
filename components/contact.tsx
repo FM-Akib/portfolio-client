@@ -1,37 +1,43 @@
-"use client"
+'use client';
 
-import type React from "react"
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { ContactDetails } from '@/types/allTypes';
+import { motion } from 'framer-motion';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent } from "@/components/ui/card"
-import { Mail, MapPin, Phone } from "lucide-react"
-
-export default function Contact() {
+export default function Contact({
+  contactData,
+}: {
+  contactData: ContactDetails;
+}) {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Here you would typically handle the form submission
-    console.log("Form submitted:", formData)
+    console.log('Form submitted:', formData);
     // Reset form
-    setFormData({ name: "", email: "", subject: "", message: "" })
+    setFormData({ name: '', email: '', subject: '', message: '' });
     // Show success message
-    alert("Thank you for your message! I'll get back to you soon.")
-  }
+    alert("Thank you for your message! I'll get back to you soon.");
+  };
 
   return (
     <section id="contact" className="py-20 bg-muted/30">
@@ -46,7 +52,8 @@ export default function Contact() {
           <h2 className="text-3xl font-bold mb-4">Get In Touch</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
+            Have a project in mind or want to discuss potential opportunities?
+            Feel free to reach out!
           </p>
         </motion.div>
 
@@ -71,7 +78,7 @@ export default function Contact() {
                         href="mailto:your.email@example.com"
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
-                        your.email@example.com
+                        {contactData.email}
                       </a>
                     </div>
                   </div>
@@ -86,7 +93,7 @@ export default function Contact() {
                         href="tel:+1234567890"
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
-                        +1 (234) 567-890
+                        {contactData.phone}
                       </a>
                     </div>
                   </div>
@@ -97,7 +104,9 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium">Location</h4>
-                      <p className="text-sm text-muted-foreground">San Francisco, CA</p>
+                      <p className="text-sm text-muted-foreground">
+                        {contactData.address}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -165,5 +174,5 @@ export default function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,69 +1,73 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Menu, X, Sun, Moon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { motion, AnimatePresence } from "framer-motion"
-import { useTheme } from "next-themes"
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, Moon, Sun, X } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Certificates", href: "#certificates" },
-  { name: "Achievements", href: "#achievements" },
-  { name: "Contact", href: "#contact" },
-  { name: "Blog", href: "/blog" },
-]
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Certificates', href: '#certificates' },
+  { name: 'Achievements', href: '#achievements' },
+  { name: 'Contact', href: '#contact' },
+  { name: 'Blog', href: '/blog' },
+];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
-  const [activeSection, setActiveSection] = useState("home")
-  const [mounted, setMounted] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [activeSection, setActiveSection] = useState('home');
+  const [mounted, setMounted] = useState(false);
 
   // After mounting, we can safely show the UI that depends on the theme
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      setIsScrolled(window.scrollY > 10);
 
       // Determine active section based on scroll position
-      const sections = navItems.map((item) => item.href.replace("#", "")).filter((id) => document.getElementById(id))
+      const sections = navItems
+        .map(item => item.href.replace('#', ''))
+        .filter(id => document.getElementById(id));
 
       for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i])
+        const section = document.getElementById(sections[i]);
         if (section) {
-          const rect = section.getBoundingClientRect()
+          const rect = section.getBoundingClientRect();
           if (rect.top <= 100) {
-            setActiveSection(sections[i])
-            break
+            setActiveSection(sections[i]);
+            break;
           }
         }
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
-  }
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
 
   return (
     <header
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled ? "bg-background/90 backdrop-blur-md py-3 shadow-md" : "bg-transparent py-5",
+        'fixed top-0 w-full z-50 transition-all duration-300',
+        isScrolled
+          ? 'bg-background/90 backdrop-blur-md py-3 shadow-md'
+          : 'bg-transparent py-5',
       )}
     >
       <div className="container flex items-center justify-between">
@@ -82,8 +86,10 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center space-x-1">
           {navItems.map((item, index) => {
             const isActive =
-              activeSection === item.href.replace("#", "") ||
-              (item.href === "/blog" && window.location.pathname.startsWith("/blog"))
+              activeSection === item.href.replace('#', '') ||
+              (item.href === '/blog' &&
+                mounted &&
+                window.location.pathname.startsWith('/blog'));
 
             return (
               <motion.div
@@ -95,22 +101,24 @@ export default function Navbar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "px-3 py-2 text-sm font-medium transition-colors",
-                    isActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary",
+                    'px-3 py-2 text-sm font-medium transition-colors',
+                    isActive
+                      ? 'text-primary font-semibold'
+                      : 'text-muted-foreground hover:text-primary',
                   )}
-                  onClick={(e) => {
-                    if (item.href.startsWith("#")) {
-                      e.preventDefault()
+                  onClick={e => {
+                    if (item.href.startsWith('#')) {
+                      e.preventDefault();
                       document.querySelector(item.href)?.scrollIntoView({
-                        behavior: "smooth",
-                      })
+                        behavior: 'smooth',
+                      });
                     }
                   }}
                 >
                   {item.name}
                 </Link>
               </motion.div>
-            )
+            );
           })}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -139,11 +147,11 @@ export default function Navbar() {
           >
             <Button
               className="ml-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
-              onClick={(e) => {
-                e.preventDefault()
-                document.querySelector("#contact")?.scrollIntoView({
-                  behavior: "smooth",
-                })
+              onClick={e => {
+                e.preventDefault();
+                document.querySelector('#contact')?.scrollIntoView({
+                  behavior: 'smooth',
+                });
               }}
             >
               Get in Touch
@@ -166,8 +174,16 @@ export default function Navbar() {
               <span className="sr-only">Toggle theme</span>
             </Button>
           )}
-          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </Button>
         </div>
       </div>
@@ -177,47 +193,51 @@ export default function Navbar() {
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className="md:hidden bg-background/95 backdrop-blur-md"
           >
             <div className="container py-4 flex flex-col space-y-3">
-              {navItems.map((item) => {
+              {navItems.map(item => {
                 const isActive =
-                  activeSection === item.href.replace("#", "") ||
-                  (item.href === "/blog" && window.location.pathname.startsWith("/blog"))
+                  activeSection === item.href.replace('#', '') ||
+                  (item.href === '/blog' &&
+                    mounted &&
+                    window.location.pathname.startsWith('/blog'));
 
                 return (
                   <Link
                     key={item.name}
                     href={item.href}
                     className={cn(
-                      "px-3 py-2 text-sm font-medium transition-colors",
-                      isActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary",
+                      'px-3 py-2 text-sm font-medium transition-colors',
+                      isActive
+                        ? 'text-primary font-semibold'
+                        : 'text-muted-foreground hover:text-primary',
                     )}
-                    onClick={(e) => {
-                      if (item.href.startsWith("#")) {
-                        e.preventDefault()
+                    onClick={e => {
+                      if (item.href.startsWith('#')) {
+                        e.preventDefault();
                         document.querySelector(item.href)?.scrollIntoView({
-                          behavior: "smooth",
-                        })
+                          behavior: 'smooth',
+                        });
                       }
-                      setMobileMenuOpen(false)
+                      setMobileMenuOpen(false);
                     }}
                   >
                     {item.name}
                   </Link>
-                )
+                );
               })}
               <Button
                 className="w-full mt-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.querySelector("#contact")?.scrollIntoView({
-                    behavior: "smooth",
-                  })
-                  setMobileMenuOpen(false)
+                onClick={e => {
+                  e.preventDefault();
+                  document.querySelector('#contact')?.scrollIntoView({
+                    behavior: 'smooth',
+                  });
+                  setMobileMenuOpen(false);
                 }}
               >
                 Get in Touch
@@ -227,5 +247,5 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }

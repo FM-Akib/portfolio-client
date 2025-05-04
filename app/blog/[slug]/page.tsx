@@ -1,45 +1,49 @@
-import type { Metadata } from "next"
-import Link from "next/link"
-import Image from "next/image"
-import { notFound } from "next/navigation"
-import { ArrowLeft, Calendar, Clock } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { blogPosts } from "@/lib/blog-data"
-import { Separator } from "@/components/ui/separator"
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import axiosInstance from '@/lib/axios';
+import { Blog } from '@/types/allTypes';
+import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 type Props = {
   params: {
-    slug: string
-  }
-}
+    slug: string;
+  };
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = blogPosts.find((post) => post.slug === params.slug)
+  const res = await axiosInstance.get(`/blogs/${params.slug}`);
+  const post = res.data.data as Blog;
 
   if (!post) {
     return {
-      title: "Blog Post Not Found",
-    }
+      title: 'Blog Post Not Found',
+    };
   }
 
   return {
     title: `${post.title} | Blog`,
     description: post.excerpt,
-    keywords: [...post.tags, "blog", "article", "software development"],
-    authors: [{ name: "Your Name" }],
+    keywords: [...post.tags, 'blog', 'article', 'software development'],
+    authors: [{ name: 'Your Name' }],
     openGraph: {
-      type: "article",
-      locale: "en_US",
-      url: `https://your-portfolio-url.com/blog/${post.slug}`,
+      type: 'article',
+      locale: 'en_US',
+      url: `https://your-portfolio-url.com/blog/${post._id}`,
       title: post.title,
       description: post.excerpt,
-      publishedTime: post.date,
-      authors: ["Your Name"],
+      publishedTime: post.publication_date
+        ? new Date(post.publication_date).toISOString()
+        : new Date().toISOString(),
+      authors: ['Mohammad Fahim Muntasir Akib'],
       tags: post.tags,
       images: [
         {
-          url: post.coverImage || "/og-blog-image.jpg",
+          url: post.cover_image_url || '/og-blog-image.jpg',
           width: 1200,
           height: 630,
           alt: post.title,
@@ -47,20 +51,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      creator: "@yourtwitterhandle",
-      images: [post.coverImage || "/og-blog-image.jpg"],
+      creator: '@yourtwitterhandle',
+      images: [post.cover_image_url || '/og-blog-image.jpg'],
     },
-  }
+  };
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = blogPosts.find((post) => post.slug === params.slug)
+export default async function BlogPostPage({ params }: Props) {
+  const res2 = await axiosInstance.get(`/blogs/${params.slug}`);
+  const post = res2.data.data as Blog;
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -75,8 +80,12 @@ export default function BlogPostPage({ params }: Props) {
 
         <div className="mb-8">
           <div className="flex flex-wrap gap-2 mb-4">
-            {post.tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20">
+            {post.tags.map(tag => (
+              <Badge
+                key={tag}
+                variant="secondary"
+                className="bg-primary/10 text-primary hover:bg-primary/20"
+              >
                 {tag}
               </Badge>
             ))}
@@ -87,18 +96,29 @@ export default function BlogPostPage({ params }: Props) {
           <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-6">
             <div className="flex items-center gap-1">
               <Calendar className="h-4 w-4" />
-              <span>{post.date}</span>
+              <span>
+                {post.publication_date
+                  ? new Date(post.publication_date).toLocaleDateString(
+                      'en-US',
+                      {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      },
+                    )
+                  : 'Date not available'}
+              </span>
             </div>
             <div className="flex items-center gap-1">
               <Clock className="h-4 w-4" />
-              <span>{post.readingTime} min read</span>
+              <span>5 min read</span>
             </div>
           </div>
         </div>
 
         <div className="rounded-lg overflow-hidden mb-8 shadow-lg">
           <Image
-            src={post.coverImage || "/placeholder.svg"}
+            src={post.cover_image_url || '/placeholder.svg'}
             alt={post.title}
             width={800}
             height={400}
@@ -107,7 +127,7 @@ export default function BlogPostPage({ params }: Props) {
         </div>
 
         <div className="prose prose-green max-w-none">
-          {post.content.map((paragraph, index) => (
+          {post.content_markdown?.split('\n\n').map((paragraph, index) => (
             <p key={index} className="mb-4 text-foreground/90 leading-relaxed">
               {paragraph}
             </p>
@@ -120,7 +140,11 @@ export default function BlogPostPage({ params }: Props) {
           <div>
             <h3 className="text-lg font-medium mb-1">Share this article</h3>
             <div className="flex gap-2">
-              <Button variant="outline" size="icon" className="rounded-full h-8 w-8">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full h-8 w-8"
+              >
                 <span className="sr-only">Share on Twitter</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +161,11 @@ export default function BlogPostPage({ params }: Props) {
                   <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
                 </svg>
               </Button>
-              <Button variant="outline" size="icon" className="rounded-full h-8 w-8">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full h-8 w-8"
+              >
                 <span className="sr-only">Share on LinkedIn</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +184,11 @@ export default function BlogPostPage({ params }: Props) {
                   <circle cx="4" cy="4" r="2" />
                 </svg>
               </Button>
-              <Button variant="outline" size="icon" className="rounded-full h-8 w-8">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full h-8 w-8"
+              >
                 <span className="sr-only">Share on Facebook</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -184,5 +216,5 @@ export default function BlogPostPage({ params }: Props) {
         </div>
       </div>
     </main>
-  )
+  );
 }

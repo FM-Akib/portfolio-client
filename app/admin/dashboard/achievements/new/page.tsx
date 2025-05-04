@@ -15,6 +15,7 @@ export default function NewAchievementPage() {
     _id: '',
     title: '',
     organization: '',
+    image: '',
     year: new Date().getFullYear(),
     description: '',
   });
@@ -136,6 +137,19 @@ export default function NewAchievementPage() {
                   required
                 />
               </div>
+            </div>
+            <div className="mt-6">
+              <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Image URL
+              </label>
+              <input
+                type="text"
+                name="image"
+                value={achievementData.image}
+                onChange={handleChange}
+                placeholder="e.g., https://example.com/image.jpg"
+                className="w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-green-500 focus:outline-none focus:ring-green-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+              />
             </div>
 
             <div className="mt-6">

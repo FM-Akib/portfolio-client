@@ -1,88 +1,66 @@
-"use client"
+'use client';
 
-import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Award, Trophy, Medal, Star, BadgeIcon as Certificate } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Badge } from "@/components/ui/badge"
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import { Achievement } from '@/types/allTypes';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  Award,
+  BadgeIcon as Certificate,
+  ChevronLeft,
+  ChevronRight,
+  Medal,
+  Star,
+  Trophy,
+} from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
-const achievements = [
-  {
-    title: "Best Innovative Solution Award",
-    organization: "Tech Innovation Summit 2023",
-    description: "Recognized for developing an AI-powered solution that improved process efficiency by 40%.",
-    image: "/placeholder.svg?height=400&width=600",
-    icon: <Trophy className="h-5 w-5" />,
-    year: "2023",
-  },
-  {
-    title: "Open Source Contributor of the Year",
-    organization: "GitHub Community Awards",
-    description: "Acknowledged for significant contributions to open source projects with over 500 merged PRs.",
-    image: "/placeholder.svg?height=400&width=600",
-    icon: <Star className="h-5 w-5" />,
-    year: "2022",
-  },
-  {
-    title: "Hackathon Champion",
-    organization: "Global Code Fest 2022",
-    description: "Led a team of 4 to victory by building a sustainable technology solution in 48 hours.",
-    image: "/placeholder.svg?height=400&width=600",
-    icon: <Award className="h-5 w-5" />,
-    year: "2022",
-  },
-  {
-    title: "Distinguished Speaker",
-    organization: "International Developer Conference",
-    description: "Delivered a keynote presentation on emerging web technologies to an audience of 1,000+ developers.",
-    image: "/placeholder.svg?height=400&width=600",
-    icon: <Certificate className="h-5 w-5" />,
-    year: "2021",
-  },
-  {
-    title: "Excellence in Leadership",
-    organization: "Tech Leaders Association",
-    description: "Recognized for exceptional leadership in guiding a team of 15 developers on a critical project.",
-    image: "/placeholder.svg?height=400&width=600",
-    icon: <Medal className="h-5 w-5" />,
-    year: "2021",
-  },
-]
+export const icons = {
+  award: <Award className="h-6 w-6" />,
+  certificate: <Certificate className="h-6 w-6" />,
+  medal: <Medal className="h-6 w-6" />,
+  star: <Star className="h-6 w-6" />,
+  trophy: <Trophy className="h-6 w-6" />,
+};
 
-export default function Achievements() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [direction, setDirection] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [isMobile, setIsMobile] = useState(false)
+export default function Achievements({
+  achievements,
+}: {
+  achievements: Achievement[];
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
+      setIsMobile(window.innerWidth < 768);
+    };
 
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
 
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const nextSlide = () => {
-    setDirection(1)
-    setActiveIndex((prev) => (prev === achievements.length - 1 ? 0 : prev + 1))
-  }
+    setDirection(1);
+    setActiveIndex(prev => (prev === achievements.length - 1 ? 0 : prev + 1));
+  };
 
   const prevSlide = () => {
-    setDirection(-1)
-    setActiveIndex((prev) => (prev === 0 ? achievements.length - 1 : prev - 1))
-  }
+    setDirection(-1);
+    setActiveIndex(prev => (prev === 0 ? achievements.length - 1 : prev - 1));
+  };
 
   const goToSlide = (index: number) => {
-    setDirection(index > activeIndex ? 1 : -1)
-    setActiveIndex(index)
-  }
+    setDirection(index > activeIndex ? 1 : -1);
+    setActiveIndex(index);
+  };
 
   const variants = {
     enter: (direction: number) => ({
@@ -97,10 +75,13 @@ export default function Achievements() {
       x: direction < 0 ? 1000 : -1000,
       opacity: 0,
     }),
-  }
+  };
 
   return (
-    <section id="achievements" className="py-20 bg-gradient-to-b from-primary/5 to-background">
+    <section
+      id="achievements"
+      className="py-20 bg-gradient-to-b from-primary/5 to-background"
+    >
       <div className="container max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -109,10 +90,13 @@ export default function Achievements() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold mb-4">Achievements & Recognition</h2>
+          <h2 className="text-3xl font-bold mb-4">
+            Achievements & Recognition
+          </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-primary to-primary/50 mx-auto mb-6"></div>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Highlights of my professional journey and recognition received along the way.
+            Highlights of my professional journey and recognition received along
+            the way.
           </p>
         </motion.div>
 
@@ -127,7 +111,7 @@ export default function Achievements() {
                 animate="center"
                 exit="exit"
                 transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  x: { type: 'spring', stiffness: 300, damping: 30 },
                   opacity: { duration: 0.2 },
                 }}
                 className="flex flex-col md:flex-row gap-8 items-center"
@@ -135,7 +119,9 @@ export default function Achievements() {
                 <div className="md:w-1/2">
                   <div className="relative rounded-lg overflow-hidden border-8 border-background shadow-xl">
                     <Image
-                      src={achievements[activeIndex].image || "/placeholder.svg"}
+                      src={
+                        achievements[activeIndex].image || '/placeholder.svg'
+                      }
                       alt={achievements[activeIndex].title}
                       width={600}
                       height={400}
@@ -143,10 +129,15 @@ export default function Achievements() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end">
                       <div className="p-6 text-white">
-                        <Badge variant="outline" className="bg-primary/20 text-white border-primary/30 mb-2">
+                        <Badge
+                          variant="outline"
+                          className="bg-primary/20 text-white border-primary/30 mb-2"
+                        >
                           {achievements[activeIndex].year}
                         </Badge>
-                        <h3 className="text-xl font-bold">{achievements[activeIndex].organization}</h3>
+                        <h3 className="text-xl font-bold">
+                          {achievements[activeIndex].organization}
+                        </h3>
                       </div>
                     </div>
                   </div>
@@ -156,11 +147,18 @@ export default function Achievements() {
                     <CardContent className="pt-6">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="bg-primary/10 p-2 rounded-full text-primary">
-                          {achievements[activeIndex].icon}
+                          {/* {achievements[activeIndex].icon} */}
+                          {icons[
+                            achievements[activeIndex].icon as keyof typeof icons
+                          ] || <Award className="h-6 w-6" />}
                         </div>
-                        <h3 className="text-2xl font-bold text-primary">{achievements[activeIndex].title}</h3>
+                        <h3 className="text-2xl font-bold text-primary">
+                          {achievements[activeIndex].title}
+                        </h3>
                       </div>
-                      <p className="text-muted-foreground mb-6">{achievements[activeIndex].description}</p>
+                      <p className="text-muted-foreground mb-6">
+                        {achievements[activeIndex].description}
+                      </p>
                       <div className="flex justify-between items-center">
                         <div className="flex gap-2">
                           {achievements.map((_, index) => (
@@ -168,10 +166,10 @@ export default function Achievements() {
                               key={index}
                               onClick={() => goToSlide(index)}
                               className={cn(
-                                "w-3 h-3 rounded-full transition-all",
+                                'w-3 h-3 rounded-full transition-all',
                                 index === activeIndex
-                                  ? "bg-gradient-to-r from-primary to-primary/70 scale-125"
-                                  : "bg-muted hover:bg-primary/30",
+                                  ? 'bg-gradient-to-r from-primary to-primary/70 scale-125'
+                                  : 'bg-muted hover:bg-primary/30',
                               )}
                               aria-label={`Go to slide ${index + 1}`}
                             />
@@ -185,7 +183,9 @@ export default function Achievements() {
                             className="rounded-full hover:bg-primary/10 hover:text-primary"
                           >
                             <ChevronLeft className="h-4 w-4" />
-                            <span className="sr-only">Previous achievement</span>
+                            <span className="sr-only">
+                              Previous achievement
+                            </span>
                           </Button>
                           <Button
                             size="icon"
@@ -230,5 +230,5 @@ export default function Achievements() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,3 +1,5 @@
+import { icons } from '@/components/achievements';
+
 // types/about.ts
 export interface SocialLinks {
   github?: string;
@@ -26,7 +28,9 @@ export interface Achievement {
   title: string;
   organization: string;
   year: number;
+  image: string;
   description: string;
+  icon?: keyof typeof icons;
   createdAt?: Date;
   updatedAt?: Date;
 }
