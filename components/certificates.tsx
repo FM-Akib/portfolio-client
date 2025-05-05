@@ -31,25 +31,6 @@ export default function Certificates({
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
         </motion.div>
 
-        {/* Marquee Effect for Titles */}
-        {/* <div
-          ref={marqueeRef}
-          className="relative overflow-hidden mb-12 py-4 bg-primary/5 rounded-lg"
-        >
-          <div
-            className="marquee-content flex whitespace-nowrap animate-marquee"
-            style={{
-              animation: 'marquee 30s linear infinite',
-            }}
-          >
-            {certificates.map((cert, index) => (
-              <span key={index} className="mx-8 text-xl font-bold text-primary">
-                {cert.title}
-              </span>
-            ))}
-          </div>
-        </div> */}
-
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {certificates.map((cert, index) => (
             <motion.div

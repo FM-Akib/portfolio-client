@@ -98,3 +98,15 @@ export interface Project {
   createdAt?: Date;
   updatedAt?: Date;
 }
+export interface Skill {
+  name: string;
+  level: number;
+}
+
+export interface SkillCategory {
+  _id?: string;
+  category: string;
+  skills: Skill[];
+  createdAt?: Date;
+  updatedAt?: Date;
+}
